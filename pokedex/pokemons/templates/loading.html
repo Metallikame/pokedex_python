@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Pokémon</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f8f9fa; /* Couleur de fond */
+            color: #343a40; /* Couleur du texte */
+            font-family: 'Arial', sans-serif;
+        }
+
+        .loading-container {
+            text-align: center;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        .pokemon {
+            position: relative;
+            height: 100px;
+            width: 100px;
+            background: linear-gradient(to bottom, rgb(254, 0, 1) 50%, white 50%);
+            border-radius: 50%;
+            border: 8px solid black;
+            animation: spin 1s linear infinite;
+        }
+
+        .pokemon::before {
+            content: '';
+            position: absolute;
+            height: 8px;
+            width: 100px;
+            background: black;
+            top: 50px;
+            left: 0px;
+            transform: translatey(-50%);
+        }
+
+        .pokemon::after {
+            content: '';
+            position: absolute;
+            height: 38px;
+            width: 38px;
+            border-radius: 50%;
+            background: white;
+            top: 50px;
+            left: 50px;
+            transform: translate(-50%, -50%);
+            box-shadow: inset 0 0 0 8px black, inset 0 0 0 10px white, inset 0 0 0 12px black;
+        }
+
+        /* Spin Animation */
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="loading-container">
+    <div class="pokemon"></div>
+    <p>Loading Pokémon...</p>
+</div>
+<script>
+    window.location.href = 'http://localhost:8000/pokedex/';
+</script>
+</body>
+</html>

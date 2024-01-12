@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    {% load static %}
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style.css' %}"
+    />
+    <link href="https://fonts.cdnfonts.com/css/touch" rel="stylesheet" />
+    <link href="https://fonts.cdnfonts.com/css/eurocorp" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <title>Pokédex</title>
+  </head>
+  <body>
+    <div class="pokedex">
+      <span class="alert-danger" hidden="hidden">{{ message }}</span>
+
+      <h1 id="title">Pokédex</h1>
+
+      <div id="loading-indicator" style="display: none">
+        Chargement en cours...
+      </div>
+      <div>
+        <form class="search-pokemon" method="GET" action="{% url 'pokedex' %}">
+          <div>
+            <label for="pokemon-search">Rechercher votre Pokemon :</label>
+            <input type="search" id="pokemon-search" name="pokemon-filter" />
+          </div>
+          <button type="submit">Rechercher</button>
+        </form>
+      </div>
+
+      <div class="error-message">
+        {% if message %}
+        <p>{{ message }}</p>
+        {% endif %}
+      </div>
+
+      <div class="pokemons-cards">
+        {% for pokemon in pokemons %}
+        <a href="{% url 'pokemon_details' pokemon.id %}" rel="plus d'info">
+          <div class="pokemon-card">
+            <div class="card-header">
+              <h5>{{ pokemon.name }}</h5>
+              <p>{{ pokemon.hp }} HP</p>
+            </div>
+            <div class="card-image-background">
+              <img src="{{ pokemon.image }}" alt="{{ pokemon.name }} Image" />
+            </div>
+            <div class="card-details">
+              <p>Type: {{ pokemon.type }}</p>
+              <p>Attaque: {{ pokemon.attaque }}</p>
+              <p>Défense: {{ pokemon.defense }}</p>
+            </div>
+
+            <form method="POST" action="{% url 'pokedex' %}">
+              {% csrf_token %}
+              <input type="hidden" name="pokemon_id" value="{{ pokemon.id }}" />
+              <button type="submit" class="add-to-team-btn">
+                Ajouter à l'équipe
+              </button>
+            </form>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    <!-- Conteneur pour les cases d'équipe alignées en haut à droite -->
+    <div class="equipes sidebar">
+      <div class="equipe-container active" id="equipe-en-cours">
+        <h5 class="equipe-title clickable">Équipe en cours de construction</h5>
+        <div class="equipe-card-container">
+          <div class="equipe-card">
+            <img
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ pokemon_id_1 }}.png"
+              alt="Image Pokémon {{ pokemon_id_1 }}"
+              class="equipe-image"
+              style="width: 80px; height: 80px"
+            />
+            <form method="POST" action="{% url 'pokedex' %}">
+              {% csrf_token %}
+              <input type="hidden" name="pokemon_id_suppression" value="1" />
+              <button type="submit" class="btn btn-danger btn-remove-pokemon">
+                x
+              </button>
+            </form>
+          </div>
+          <div class="equipe-card">
+            <img
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ pokemon_id_2 }}.png"
+              alt="Image Pokémon {{ pokemon_id_2 }}"
+              class="equipe-image"
+              style="width: 80px; height: 80px"
+            />
+            <form method="POST" action="{% url 'pokedex' %}">
+              {% csrf_token %}
+              <input type="hidden" name="pokemon_id_suppression" value="2" />
+              <button type="submit" class="btn btn-danger btn-remove-pokemon">
+                x
+              </button>
+            </form>
+          </div>
+          <div class="equipe-card">
+            <img
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ pokemon_id_3 }}.png"
+              alt="Image Pokémon {{ pokemon_id_3 }}"
+              class="equipe-image"
+              style="width: 80px; height: 80px"
+            />
+            <form method="POST" action="{% url 'pokedex' %}">
+              {% csrf_token %}
+              <input type="hidden" name="pokemon_id_suppression" value="3" />
+              <button type="submit" class="btn btn-danger btn-remove-pokemon">
+                x
+              </button>
+            </form>
+          </div>
+          <div class="equipe-card">
+            <img
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ pokemon_id_4 }}.png"
+              alt="Image Pokémon {{ pokemon_id_4 }}"
+              class="equipe-image"
+              style="width: 80px; height: 80px"
+            />
+            <form method="POST" action="{% url 'pokedex' %}">
+              {% csrf_token %}
+              <input type="hidden" name="pokemon_id_suppression" value="4" />
+              <button type="submit" class="btn btn-danger btn-remove-pokemon">
+                x
+              </button>
+            </form>
+          </div>
+          <div class="equipe-card">
+            <img
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ pokemon_id_5 }}.png"
+              alt="Image Pokémon {{ pokemon_id_5 }}"
+              class="equipe-image"
+              style="width: 80px; height: 80px"
+            />
+            <form method="POST" action="{% url 'pokedex' %}">
+              {% csrf_token %}
+              <input type="hidden" name="pokemon_id_suppression" value="5" />
+              <button type="submit" class="btn btn-danger btn-remove-pokemon">
+                x
+              </button>
+            </form>
+          </div>
+          <div class="equipe-card">
+            <img
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ pokemon_id_6 }}.png"
+              alt="Image Pokémon {{ pokemon_id_6 }}"
+              class="equipe-image"
+              style="width: 80px; height: 80px"
+            />
+            <form method="POST" action="{% url 'pokedex' %}">
+              {% csrf_token %}
+              <input type="hidden" name="pokemon_id_suppression" value="6" />
+              <button type="submit" class="btn btn-danger btn-remove-pokemon">
+                x
+              </button>
+            </form>
+          </div>
+          <div class="sauvegarde_equipe">
+            <!-- Bouton pour sauvegarder l'équipe -->
+            <form method="POST" action="{% url 'pokedex' %}">
+              {% csrf_token %}
+              <input type="hidden" name="save_team" value="save_team" />
+              <button type="submit" class="btn btn-primary mt-3">
+                Sauvegarder l'équipe
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="sauvegarde_equipe">
+        <!-- Affichage de toutes les équipes enregistrées -->
+        {% for equipe in equipes %}
+
+        <h5 class="equipe-title">Équipe n°{{ forloop.counter }}</h5>
+        <div class="equipe-container active" id="equipe-{{ forloop.counter }}">
+          <div class="equipe-card-container">
+            {% for pokemon_id in equipe %}
+
+            <div class="equipe-card">
+              <img
+                src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ pokemon_id }}.png"
+                alt="Image Pokémon {{ pokemon_id }}"
+                class="equipe-image"
+                style="width: 80px; height: 80px"
+              />
+            </div>
+            {% endfor %}
+            <form method="POST" action="{% url 'pokedex' %}">
+              {% csrf_token %}
+              <input
+                type="hidden"
+                name="delete_team_number"
+                value="{{ forloop.counter }}"
+              />
+              <button type="submit" class="btn btn-danger">Supprimer</button>
+            </form>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          var loadingIndicator = document.getElementById('loading-indicator');
+          // Afficher l'indicateur de chargement si les données ne sont pas en cache
+          var loading = {% if pokemons is None %}true{% else %}false{% endif %};
+          if (loading) {
+              loadingIndicator.style.display = 'block';
+          }
+      });
+    </script>
+  </body>
+</html>
